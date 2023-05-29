@@ -36,3 +36,36 @@ server.login('youremail@email.com', 'yourpassword')
 server.sendmail('youremail@email.com', 'recipient', 'Weather\n\n' + message)
 
 #joshweather567@gmail.com
+
+
+from bs4 import BeautifulSoup
+import requests, re
+
+#HOW TO SCRAPE ONE PAGE OF QUOTES
+'''
+req = requests.get("https://transcripts.foreverdreaming.org/viewtopic.php?t=25301")
+soup = BeautifulSoup(req.content, "html.parser")
+
+page_text = soup.get_text()
+
+regex = (r'Michael: \s*([^\n\r]*)')
+match = re.findall(regex, page_text)
+print(match)
+'''
+
+#HOW TO SCRAPE MULTIPLE PAGES?
+url_for_multiple_quotes = "https://transcripts.foreverdreaming.org/viewforum.php?f=574&sid=34f5b8811213289fa5f508f836af3f4f"
+req = requests.get(url_for_multiple_quotes)
+soup = BeautifulSoup(req.content, "html.parser")
+url_list = []
+for link in soup.find_all("a"):
+    get_links = link.get('href')
+    print(type(get_links))
+#     # url_list.append(test)
+
+# print(url_list)
+#remove each string that does not match the pattern of ./viewtopic.php?t=25498
+
+
+
+# add them to the end of https://transcripts.foreverdreaming.org/; might look like ./viewtopic.php?t=25498
